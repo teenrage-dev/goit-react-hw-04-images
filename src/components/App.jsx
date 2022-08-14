@@ -28,21 +28,15 @@ export const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [largeImgURL, setLargeImgURL] = useState('');
 
-  console.log(photo);
-  console.log(status);
-  console.log(page);
   useEffect(() => {
-    // console.log('Add event listener');
     window.addEventListener('click', handleClickList);
     return () => {
-      // console.log('Remove event listener');
       window.removeEventListener('click', handleClickList);
     };
   });
 
   useEffect(() => {
     setStatus(Status.PENDING);
-    console.log(page);
     fetch(
       `https://pixabay.com/api/?q=${value}&page=${page}&key=28032528-2733f4db32465b2bae0fa9703&image_type=photo&orientation=horizontal&per_page=12`
     )
