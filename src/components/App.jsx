@@ -141,15 +141,15 @@ export const App = () => {
       )}
       {status === Status.REJECTED && toast.error(`${error}`)}
 
-      {status === Status.RESOLVED && (
-        <>
-          <ul id="ImageGallery" className={css.ImageGallery}>
-            <ImageGalleryItem photo={photo} />
-          </ul>
-          <Button onClick={loadMore} />
-          {isOpen && <Modal onClose={closeModal} largeImgURL={largeImgURL} />}
-        </>
-      )}
+      {/* {status === Status.RESOLVED && ( */}
+      <>
+        <ul id="ImageGallery" className={css.ImageGallery}>
+          <ImageGalleryItem photo={photo} />
+        </ul>
+        <Button onClick={loadMore} />
+        {isOpen && <Modal onClose={closeModal} largeImgURL={largeImgURL} />}
+      </>
+      {/* )} */}
     </div>
   );
 };
