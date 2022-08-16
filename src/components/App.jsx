@@ -36,6 +36,9 @@ export const App = () => {
   });
 
   useEffect(() => {
+    if (value === '') {
+      return;
+    }
     setStatus(Status.PENDING);
     fetch(
       `https://pixabay.com/api/?q=${value}&page=${page}&key=28032528-2733f4db32465b2bae0fa9703&image_type=photo&orientation=horizontal&per_page=12`
