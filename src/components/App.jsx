@@ -8,9 +8,7 @@ import { Button } from './Button/Button';
 import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 
 import MovingComponent from 'react-moving-text';
-import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Status = {
   IDLE: 'Idle',
@@ -35,11 +33,13 @@ export const App = () => {
     };
   });
 
+  // HTTP request to get photos
   useEffect(() => {
     if (value === '') {
       return;
     }
     setStatus(Status.PENDING);
+
     fetch(
       `https://pixabay.com/api/?q=${value}&page=${page}&key=28032528-2733f4db32465b2bae0fa9703&image_type=photo&orientation=horizontal&per_page=12`
     )
@@ -102,20 +102,8 @@ export const App = () => {
   // RENDER
 
   return (
-    <div className={css.App}>
+    <div id="App" className={css.App}>
       <Searchbar onSubmit={handleSubmitForm} />
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
       {status === Status.IDLE && (
         <div className={css.ImageGalleryWrapper}>
           <MovingComponent
@@ -136,17 +124,25 @@ export const App = () => {
           <InfinitySpin width="200" color="#3f51b5" />
         </div>
       )}
-      {status === Status.REJECTED && toast.error(`${error}`)}
-
-      {/* {status === Status.RESOLVED && ( */}
+      {status === Status.REJECTED &&
+        toast.error(`${error}`, {
+          style: {
+            borderRadius: '10px',
+            background: '#cc5d5d',
+            color: '#fff',
+            width: '250px',
+            height: '40px',
+          },
+        })}
       <>
         <ul id="ImageGallery" className={css.ImageGallery}>
           <ImageGalleryItem photo={photo} />
         </ul>
-        <Button onClick={loadMore} />
+        {status === Status.RESOLVED && <Button onClick={loadMore} />}
         {isOpen && <Modal onClose={closeModal} largeImgURL={largeImgURL} />}
       </>
-      {/* )} */}
+
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };

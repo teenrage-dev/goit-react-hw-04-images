@@ -1,6 +1,6 @@
 import css from './Searchbar.module.css';
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import PropTypes from 'prop-types';
 
 export const Searchbar = ({ onSubmit }) => {
