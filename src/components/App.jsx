@@ -102,7 +102,7 @@ export const App = () => {
   // RENDER
 
   return (
-    <div id="App" className={css.App}>
+    <div className={css.App}>
       <Searchbar onSubmit={handleSubmitForm} />
       {status === Status.IDLE && (
         <div className={css.ImageGalleryWrapper}>

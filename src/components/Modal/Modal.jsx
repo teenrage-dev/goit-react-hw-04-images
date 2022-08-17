@@ -20,7 +20,11 @@ export const Modal = ({ onClose, largeImgURL }) => {
     }
   };
   const handleBackdropClick = e => {
-    if (e.currentTarget) {
+    console.log(e.target);
+
+    if (e.target === e.currentTarget) {
+      console.log(e.currentTarget);
+      console.log(e.target);
       onClose();
     }
   };
@@ -28,7 +32,7 @@ export const Modal = ({ onClose, largeImgURL }) => {
   return createPortal(
     <div className={css.Overlay} onClick={handleBackdropClick}>
       <div className={css.Modal}>
-        <img src={largeImgURL} alt="" loading="lazy" />
+        <img src={largeImgURL} alt="Pixabay" loading="lazy" />
       </div>
     </div>,
     modalRoot
@@ -36,6 +40,6 @@ export const Modal = ({ onClose, largeImgURL }) => {
 };
 
 Modal.propTypes = {
-  largeImgURL: PropTypes.string.isRequired,
+  largeImgURL: PropTypes.string,
   onclose: PropTypes.func,
 };
