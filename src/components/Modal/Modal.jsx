@@ -20,11 +20,7 @@ export const Modal = ({ onClose, largeImgURL }) => {
     }
   };
   const handleBackdropClick = e => {
-    console.log(e.target);
-
     if (e.target === e.currentTarget) {
-      console.log(e.currentTarget);
-      console.log(e.target);
       onClose();
     }
   };

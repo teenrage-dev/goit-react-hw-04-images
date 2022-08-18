@@ -36,14 +36,6 @@ export const App = () => {
     },
   };
 
-  // Add Event Listener to window to open modal when user clicks on image
-  useEffect(() => {
-    window.addEventListener('click', handleClickList);
-    return () => {
-      window.removeEventListener('click', handleClickList);
-    };
-  });
-
   // HTTP request to get photos
   useEffect(() => {
     if (value === '') {
@@ -84,13 +76,6 @@ export const App = () => {
   const handleSubmitForm = value => {
     setValue(value);
     setPage(1);
-  };
-
-  // Function to handle the click on the list of images
-  const handleClickList = e => {
-    if (e.target.tagName === 'IMG') {
-      openModal(e.target.dataset.largeImg);
-    }
   };
 
   // Load more images
@@ -135,7 +120,7 @@ export const App = () => {
         </div>
       )}
       {status === Status.REJECTED && toast.error(`${error}`, toastSettings)}
-      {status === Status.RESOLVED && <ImageGallery photo={photo} />}
+      <ImageGallery photo={photo} openModal={openModal} />
       {status === Status.RESOLVED && <Button onClick={loadMore} />}
       {isOpen && <Modal onClose={closeModal} largeImgURL={largeImgURL} />}
       <Toaster position="top-right" reverseOrder={false} />
