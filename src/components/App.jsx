@@ -5,7 +5,7 @@ import { Searchbar } from './Searchbar/Searchbar';
 import { Modal } from './Modal/Modal';
 import { InfinitySpin } from 'react-loader-spinner';
 import { Button } from './Button/Button';
-import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
+import { ImageGallery } from './ImageGallery/ImageGallery';
 
 import MovingComponent from 'react-moving-text';
 import toast, { Toaster } from 'react-hot-toast';
@@ -135,14 +135,9 @@ export const App = () => {
         </div>
       )}
       {status === Status.REJECTED && toast.error(`${error}`, toastSettings)}
-      <>
-        <ul id="ImageGallery" className={css.ImageGallery}>
-          <ImageGalleryItem photo={photo} />
-        </ul>
-        {status === Status.RESOLVED && <Button onClick={loadMore} />}
-        {isOpen && <Modal onClose={closeModal} largeImgURL={largeImgURL} />}
-      </>
-
+      {status === Status.RESOLVED && <ImageGallery photo={photo} />}
+      {status === Status.RESOLVED && <Button onClick={loadMore} />}
+      {isOpen && <Modal onClose={closeModal} largeImgURL={largeImgURL} />}
       <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
