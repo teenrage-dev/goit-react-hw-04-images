@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import PropTypes from 'prop-types';
 
-export const Searchbar = ({ onSubmit }) => {
+export const Searchbar = ({ onSubmit, toastSettings }) => {
   const [value, setValue] = useState('');
 
   const handleChange = e => {
@@ -14,7 +14,7 @@ export const Searchbar = ({ onSubmit }) => {
     e.preventDefault();
 
     if (value.trim() === '') {
-      toast.error('Error: Please enter a search term.');
+      toast.error('Error: Please enter a search term.', toastSettings);
 
       setValue('');
       return;

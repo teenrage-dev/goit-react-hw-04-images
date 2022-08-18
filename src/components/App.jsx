@@ -26,6 +26,16 @@ export const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [largeImgURL, setLargeImgURL] = useState('');
 
+  const toastSettings = {
+    style: {
+      borderRadius: '10px',
+      background: '#cc5d5d',
+      color: '#fff',
+      width: '250px',
+      height: '40px',
+    },
+  };
+
   useEffect(() => {
     window.addEventListener('click', handleClickList);
     return () => {
@@ -103,7 +113,7 @@ export const App = () => {
 
   return (
     <div className={css.App}>
-      <Searchbar onSubmit={handleSubmitForm} />
+      <Searchbar onSubmit={handleSubmitForm} toastSettings={toastSettings} />
       {status === Status.IDLE && (
         <div className={css.ImageGalleryWrapper}>
           <MovingComponent
@@ -124,16 +134,7 @@ export const App = () => {
           <InfinitySpin width="200" color="#3f51b5" />
         </div>
       )}
-      {status === Status.REJECTED &&
-        toast.error(`${error}`, {
-          style: {
-            borderRadius: '10px',
-            background: '#cc5d5d',
-            color: '#fff',
-            width: '250px',
-            height: '40px',
-          },
-        })}
+      {status === Status.REJECTED && toast.error(`${error}`, toastSettings)}
       <>
         <ul id="ImageGallery" className={css.ImageGallery}>
           <ImageGalleryItem photo={photo} />
