@@ -36,6 +36,7 @@ export const App = () => {
     },
   };
 
+  // Add Event Listener to window to open modal when user clicks on image
   useEffect(() => {
     window.addEventListener('click', handleClickList);
     return () => {
@@ -110,7 +111,6 @@ export const App = () => {
   };
 
   // RENDER
-
   return (
     <div className={css.App}>
       <Searchbar onSubmit={handleSubmitForm} toastSettings={toastSettings} />
